@@ -9,6 +9,6 @@ testy = batmanX(1000:1100,:);
 
 y = predict(svm,batmanX);
 error = sum(y ~= batmany);
-errorR = (error/1000000); %% error rate
+errorR = error/1000000; %% error rate
 
 a3.drawDB(batmanX,batmany,svm);

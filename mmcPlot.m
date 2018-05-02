@@ -20,11 +20,12 @@ beta = beta/sqrt(beta(2:end)'*beta(2:end));
 %% Find the distance from the support vectors to the hyperplane
 % M should be the perpendicular distance from any support vector to the
 % hyperplane
-% --------------------------------------------
-% ------- This is where your code goes -------
-% --------------------------------------------
+i=1;
+while sv(i) ~= 1
+    i=i+1;
+end
 
-M = 0;
+M = y(i)'*(beta(1)+X(i,:)*beta(2:3));
 
 % --------------------------------------------
 % --------------------------------------------

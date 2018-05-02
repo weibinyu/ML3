@@ -35,5 +35,26 @@ classdef a3 % Same name as .m file
         end
         mse = sum/length(X);
         end
+        
+        %%fucntion draw boundary
+        function drawDB(X,y,tree)
+        n=60;
+        x0=linspace(min(X(:,1)),max(X(:,1)),n);   
+        xx0=linspace(min(X(:,2)),max(X(:,2)),n);
+        [x1,xx1] = meshgrid(x0,xx0);
+        grid = horzcat(x1(:), xx1(:), zeros(length(x1(:)), 1));
+        A=zeros(n);
+        for i=1: n
+            for j=1: n
+                z=[x0(i) xx0(j)];
+                A(j,i)=predict(tree, z);
+            end
+        end
+        gscatter(grid(:,1),grid(:,2),A(:));
+        hold on
+        gscatter(X(:,1),X(:,2),y);
+
+        end
+
     end
 end

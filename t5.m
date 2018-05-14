@@ -8,11 +8,13 @@ Bt = reshape(At,[10000,784])/255;
 subX = B(1:2000,:);
 subY = labels(1:2000);
 
-r = 1000*rand(2,2);
-L = zeros(2,1);
 
-params = templateSVM('KernelFunction', 'polynomial');
-mdl = fitcecoc(subX,subY,'Learners', params,'Coding','onevsall');
+% params = templateSVM('KernelFunction', 'gaussian','BoxConstraint',0.0010499,'KernelScale',15.579);
+% mdl = fitcecoc(subX,subY,'Learner',params,'Coding','onevsall');
+
+h = hyperparameters('fitcecoc',B,labels,'SVM');
+h(1,1).Optimize = false;
+mdl = fitcecoc(subX,subY,'OptimizeHyperparameters',h,'Coding','onevsall');
 
 py = predict(mdl,Bt);
 error = sum(py ~= labels_test);
